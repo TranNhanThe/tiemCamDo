@@ -157,7 +157,7 @@ EnhancedTableHead.propTypes = {
 function EnhancedTableToolbar({ numSelected, selected, setSelected, setRows }) {
   const handleDelete = async () => {
     try {
-      const response = await axios.delete('http://192.168.2.29:5000/bike/delete', {
+      const response = await axios.delete('http://localhost:5000/bike/delete', {
         data: { ids: selected },
       });
 
@@ -165,7 +165,7 @@ function EnhancedTableToolbar({ numSelected, selected, setSelected, setRows }) {
         console.log('Bikes deleted successfully');
         // Không cần gửi yêu cầu GET sau khi xóa
         // Cập nhật UI với danh sách todo đã được xóa
-        const updatedResponse = await axios.get('http://192.168.2.29:5000/bike/bike');
+        const updatedResponse = await axios.get('http://localhost:5000/bike');
         const updatedBikes = updatedResponse.data;
         setRows(updatedBikes);
         setSelected([]);
@@ -321,7 +321,7 @@ export default function EnhancedBike() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   useEffect(() => {
-    axios.get('http://192.168.2.29:5000/bike')
+    axios.get('http://localhost:5000/bike')
       .then(response => {
         setRows(response.data);
         setClonerows(response.data);
@@ -364,14 +364,14 @@ export default function EnhancedBike() {
     let filteredBikes = cloneRows;
   
     if (selectedValue) {
-      const normalizedStatus = selectedValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      filteredBikes = filteredBikes.filter(row => row.kho === normalizedStatus);
+      const normalizedKho = selectedValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      filteredBikes = filteredBikes.filter(row => row.kho.toLowerCase() === normalizedKho.toLowerCase());
     }
-    console.log('status spoted:' + filteredBikes.kho)
+    console.log('kho spoted:' + filteredBikes.kho)
   
     filteredBikes = filteredBikes.filter(row => {
       const normalizedBsx = row.bsx.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      return normalizedBsx.includes(trimmedSearchValue);
+      return normalizedBsx.toLowerCase().includes(trimmedSearchValue.toLowerCase());
     });
     console.log(filteredBikes)
   
@@ -484,8 +484,8 @@ export default function EnhancedBike() {
                       <TableCell align="right">
                         <EditBike
                           id={(row._id).toString()}
-                          bsx={(row.bsx).toString()}
-                          kho={(row.kho).toString()}
+                          bsx={(row.bsx)}
+                          kho={(row.kho)}
                           onSubmit={handleUpdateRows}
                         />
                       </TableCell>

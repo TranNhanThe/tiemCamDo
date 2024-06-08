@@ -3,8 +3,8 @@ const Bike = require('../models/Bike');
 const getAllBikes = async (req, res) => {
     try {
         const bikes = await Bike.find({}, '_id bsx kho');
-        // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-        res.setHeader('Access-Control-Allow-Origin', 'https://tiemcamdo-n53fzsxqf-trannhanthes-projects.vercel.app');
+         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://tiemcamdo-n53fzsxqf-trannhanthes-projects.vercel.app');
 
         res.json(bikes);
     } catch (error) {
@@ -22,7 +22,7 @@ const createBike = async (req, res) => {
             kho
         });
         const savedBike = await newBike.save();
-        res.setHeader('Access-Control-Allow-Origin', 'https://tiemcamdo-n53fzsxqf-trannhanthes-projects.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://tiemcamdo-n53fzsxqf-trannhanthes-projects.vercel.app');
         res.status(201).json(savedBike);
     } catch (error) {
         console.error('Error adding bike:', error);
@@ -38,7 +38,7 @@ const deleteBikes = async (req, res) => {
             return res.status(404).json({ message: 'Some bikes not found' });
         }
         await Bike.deleteMany({ _id: { $in: bikeIds } });
-        res.setHeader('Access-Control-Allow-Origin', 'https://tiemcamdo-n53fzsxqf-trannhanthes-projects.vercel.app/');
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
         res.status(200).json({ message: 'Bikes deleted successfully' });
     } catch (error) {
         console.error('Error deleting bikes:', error);
@@ -53,7 +53,7 @@ const updateBike = async (req, res) => {
         if (!updatedBike) {
             return res.status(404).json({ message: 'Bike not found' });
         }
-        res.setHeader('Access-Control-Allow-Origin', 'https://tiemcamdo-n53fzsxqf-trannhanthes-projects.vercel.app/');
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
         res.status(200).json(updatedBike);
     } catch (error) {
         console.error('Error updating bike:', error);

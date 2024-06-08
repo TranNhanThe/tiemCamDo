@@ -73,7 +73,7 @@ const AddBike = ({ onSubmit }) => {
     event.preventDefault();
     if (validate()) {
       try {
-        const response = await fetch('http://192.168.2.29:5000/bike', {
+        const response = await fetch('http://localhost:5000/bike', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const AddBike = ({ onSubmit }) => {
         if (response.ok) {
           console.log('Bike added successfully');
           // Fetch the updated list of todos
-          const updatedResponse = await fetch('http://192.168.2.29:5000/bike');
+          const updatedResponse = await fetch('http://localhost:5000/bike');
           const updatedBikes = await updatedResponse.json();
           // Update the UI with the updated list of todos
           onSubmit(updatedBikes);

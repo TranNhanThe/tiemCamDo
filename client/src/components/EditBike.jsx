@@ -31,7 +31,7 @@ const EditBike = ({ id, bsx, kho, onSubmit }) => {
   };
 
   const handleSubmit = async () => {
-    const response = await fetch('http://192.168.2.29:5000/bike', {
+    const response = await fetch('http://localhost:5000/bike/id', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const EditBike = ({ id, bsx, kho, onSubmit }) => {
     });
 
     if (response.ok) {
-      const updatedResponse = await axios.get('http://192.168.2.29:5000/bike');
+      const updatedResponse = await axios.get('http://localhost:5000/bike');
       const updatedBikes = updatedResponse.data;
       setSuccess('Sửa thành công');
       onSubmit(updatedBikes);
