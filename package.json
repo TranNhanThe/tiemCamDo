@@ -14,6 +14,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.3.3",
+    "react-router-dom": "^6.23.1",
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {

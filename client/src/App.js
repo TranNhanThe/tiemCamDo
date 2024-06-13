@@ -1,7 +1,12 @@
+import { Routes, Route } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
 import EnhancedTodo from './components/EnhancedTodo';
 import EnhancedBike from './components/EnhancedBike';
+import HomePage from './pages/Home'
+import NewsPage from './pages/News'
+import ContactPage from './pages/Contact'
+
 
 
 function App() {
@@ -22,10 +27,30 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div>
-      {/* <EnhancedTodo/> */}
-      <EnhancedBike/>
+    <div className="app">
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/news">News</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      {/* <EnhancedTodo/> 3 */}
+      {/* <EnhancedBike/> */}
       {/* <PopupForm/> */}
+
+    <Routes>
+      <Route path="/" element={<HomePage/>}/>
+      <Route path="/news" element={<NewsPage/>}/>   
+      <Route path="/contact" element={<ContactPage/>}/>
+    </Routes>
+      
     </div>
   );
 }
